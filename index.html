@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Categories</title>
+    <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+        
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f8f8f8;
+            }
+        
+            .header {
+                background-color: #fff;
+                padding: 20px;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+        
+            .header nav ul {
+                display: flex;
+                list-style-type: none;
+                justify-content: center;
+            }
+        
+            .header nav ul li {
+                margin: 0 15px;
+                color: #333;
+                cursor: pointer;
+            }
+        
+            .header nav ul li.highlight {
+                background-color: #32cd32;
+                padding: 10px;
+                color: white;
+                border-radius: 5px;
+            }
+        
+            .banner {
+                background-image: url('image.png'); 
+                background-size: cover;
+                padding: 60px 0;
+                text-align: center;
+                color:black;
+            }
+        
+            .banner h1 {
+                font-size: 48px;
+                margin-bottom: 10px;
+            }
+        
+            .banner p {
+                font-size: 18px;
+            }
+        
+            .categories {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                padding: 40px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        
+            .category {
+                position: relative;
+                cursor: pointer;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        
+            .category img {
+                width: 100%;
+                height: 200px; /* Set a fixed height */
+                object-fit: cover; /* Ensures the image covers the entire area without distortion */
+                transition: transform 0.3s ease;
+            }
+        
+            .category:hover img {
+                transform: scale(1.05);
+            }
+        
+            .category .overlay {
+                position: absolute;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                width: 100%;
+                padding: 10px;
+                text-align: left;
+            }
+        
+            .category .overlay h2 {
+                margin-bottom: 5px;
+            }
+        
+            .category .overlay p {
+                font-size: 14px;
+            }
+        </style>
+</head>
+<body>
+
+    <section class="banner">
+        <h1>Recipe Categories</h1>
+        <p>Pick your favorite category.</p>
+    </section>
+
+    <div class="categories">
+        <div class="category" onclick="location.href='ingredients.html?category=breakfast';">
+            <img src="image1.png" alt="Breakfast">
+            <div class="overlay">
+                <h2>Breakfast</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=salads';">
+            <img src="image2.png" alt="Salads">
+            <div class="overlay">
+                <h2>Salads</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=appetizers';">
+            <img src="image3.png" alt="Appetizers">
+            <div class="overlay">
+                <h2>Appetizers</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=soups';">
+            <img src="image4.png" alt="Soups">
+            <div class="overlay">
+                <h2>Soups</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=desserts';">
+            <img src="image5.png" alt="Desserts">
+            <div class="overlay">
+                <h2>Desserts</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=main-dishes';">
+            <img src="image6.png" alt="Main Dishes">
+            <div class="overlay">
+                <h2>Main Dishes</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=juices';">
+            <img src="image7.png" alt="Juices">
+            <div class="overlay">
+                <h2>Beverages</h2>
+            </div>
+        </div>
+        <div class="category" onclick="location.href='ingredients.html?category=snacks';">
+            <img src="image8.png" alt="Snacks">
+            <div class="overlay">
+                <h2>Snacks</h2>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

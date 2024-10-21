@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Ingredients</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #d3d9df;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+        }
+        .ingredient-input {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 50vw;
+            max-width: 600px;
+            margin: auto;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #1e90ff;
+        }
+        button {
+            background-color: purple;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+        }
+        button:hover {
+            background-color: rgb(205, 95, 205);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Enter Available Ingredients</h1>
+        <p id="category-message"></p> <!-- Message based on category -->
+    </header>
+
+    <section class="ingredient-input">
+        <form id="ingredient-form">
+            <label for="ingredients">Enter ingredients (comma-separated):</label>
+            <input type="text" id="ingredients" name="ingredients" placeholder="e.g. tomato, garlic, onion" required>
+            <button type="submit">Get Recipe</button>
+        </form>
+        <div id="recipe-output"></div>
+    </section>
+
+    <script src="recipie.js"></script> <!-- Link the recipes.js file -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Recipes Object: ", recipes);
+
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            const category = getQueryParam('category');
+            const categoryMessage = category ? `You selected: ${category.charAt(0).toUpperCase() + category.slice(1)} Recipes` : '';
+            document.getElementById('category-message').innerText = categoryMessage;
+
+            document.getElementById('ingredient-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const ingredients = document.getElementById('ingredients').value.toLowerCase().split(',').map(ingredient => ingredient.trim());
+                console.log("Entered Ingredients: ", ingredients);
+
+                if (!recipes[category]) {
+                    alert("No recipes found for the selected category!");
+                    return;
+                }
+
+                const matchingRecipes = recipes[category].filter(recipe =>
+                    recipe.ingredients.some(ingredient => ingredients.includes(ingredient.toLowerCase()))
+                );
+
+                console.log("Matching Recipes: ", matchingRecipes);
+
+                const recipeOutput = document.getElementById('recipe-output');
+                recipeOutput.innerHTML = '';
+
+                if (matchingRecipes.length > 0) {
+                    matchingRecipes.forEach(recipe => {
+                        const recipeDiv = document.createElement('div');
+                        recipeDiv.innerHTML = `
+                            <h3>${recipe.name}</h3>
+                            <p><strong>Ingredients:</strong> ${recipe.ingredients.join(', ')}</p>
+                            <p><strong>Steps:</strong> ${recipe.steps.join(' ')}</p>`;
+                        recipeOutput.appendChild(recipeDiv);
+                    });
+                } else {
+                    recipeOutput.innerHTML = `<p>No matching recipes found for the ingredients provided.</p>`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
